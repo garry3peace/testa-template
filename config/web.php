@@ -62,8 +62,21 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.*', '192.168.178.20'],  
+         'generators' => [
+            'computestaModel' => [
+                'class' => 'app\components\model\Generator',
+                'templates' => [
+                    'computesta' => '@app/components/model/default',
+                ]
+            ],
+            'computestaAjaxcrud' => [
+                'class' => 'app\components\ajaxcrud\Generator',
+                'templates' => [
+                    'computestaAjaxcrud' => '@app/components/ajaxcrud/default',
+                ]
+            ]
+        ],
     ];
 }
 
