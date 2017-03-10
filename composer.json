@@ -18,7 +18,7 @@
         "ckeditor/ckeditor": "^4.6",
         "2amigos/yii2-ckeditor-widget": "^2.0",
         "iutbay/yii2-kcfinder": "dev-master",
-        "zyx/zyx-phpmailer": "dev-master",
+        "zyx/zyx-phpmailer": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
