@@ -10,7 +10,15 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0"
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "mdmsoft/yii2-admin": "~2.0",
+        "dektrium/yii2-user": "0.9.*@dev",
+        "PHPOffice/PHPExcel": "^1.8",
+        "ckeditor/ckeditor": "^4.6",
+        "2amigos/yii2-ckeditor-widget": "^2.0",
+        "iutbay/yii2-kcfinder": "dev-master",
+        "zyx/zyx-phpmailer": "dev-master",
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
