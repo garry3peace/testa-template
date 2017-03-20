@@ -13,7 +13,7 @@ $model = new User();
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">COM</span><span class="logo-lg"> Computesa </span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">COM</span><span class="logo-lg"> Computesta </span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
