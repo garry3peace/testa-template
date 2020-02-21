@@ -1,192 +1,55 @@
-Yii 2 Basic Project Template
-============================
+Struktur Utama CMS
+================
+Web ini menggunakan Yii Framework 2, dengan template Basic.
+Seluruh coding untuk front-end akan ditaruh di folder depan.
+Sedangkan untuk backend akan ditaruh di module/backend.
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
-
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-basic/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-basic/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
-
-DIRECTORY STRUCTURE
--------------------
-
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+Membuat Table Baru
+==================
+Kalau mau membuat table baru, pastikan untuk selalu menyertakan 5 field berikut ini: 
+publish: int(11)
+created_by: int(11)
+created_at: datetime
+updated_by: int(11)
+update_at: datetime
 
 
-
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
-
-
-INSTALLATION
-------------
-
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:^1.2.0"
-php composer.phar create-project testa-template --prefer-dist --stability=dev testa-template template
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
+Membuat CRUD (create/read/update/delete) Baru pada Backend CMS
+=======================
+Misalnya kita punya satu table, bernama Slideshow.
+Kita ingin admin bebas menambah,edit atau hapus Slideshow
+Kamu tidak perlu banyak coding. Hal yang harus kamu lakukan: 
+1. Pergi ke Gii, generate model Slideshow dengan memilih Computesta Model Generator
+2. Tambahkan formFields() pada model yang baru dibuat. Tulislah seluruh field-field yang ingin kamu tampilkan di form create/update
+3. Pergi ke module/backend/controllers. Copylah salah satu coding di situ, dan ganti saja nama controller
+4. Pada bagian indexFields() tulislah seluruh field-field yang ingin kamu tampilkan di Index (list management)
 
 
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
+Upload File
+=================
+Apabila item yang kamu buat ini harus bisa upload file, maka pada formFields(), 
+buatlah parameter seperti ini
+[
+	'name'=> 'namafield',
+	'type'=>'file', //agar admin bisa upload
+	'uploadFolder'=>'@webroot/images/slideshow', //agar nanti diupload ke folder web/images/slideshow
+	'isImage'=> true //agar nanti dianggap sebagai gambar di form
+]
 
 
-CONFIGURATION
--------------
-
-### Database
-
-Edit the file `config/db.php` with real data, for example:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
-```
-
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+Ganti warna template
+==================
+Template ini menggunakan AdminLTE 2. Untuk mengganti tema warna adminLTE, sementara kita belum 
+ada cara permanen. Jadi setiap kali composer update adminlte2, kamu harus ulangi langkah ini. 
+1. Pergi ke vendor/almasaeed2010/adminlte/build/less
+2. Gantilah nilai yang ingin diubah. Contohnya saya ingin ganti warna skin red, agar lebih muda sedikit. cari file bernama variables.less
+3. Setelah selesai ganti saatnya compile ke css. Caranya, jalankan sintaks ini `lessc --clean-css _all-skins.less ../../../dist/cs
+s/skins/_all-skins.min.css`
+(Catatan, sintaks ini asumsi di komputer mu sudah jalankan dua sintaks ini sebelum-sebelumnya)
+npm install -g less
+npm install -g less-plugin-clean-css
 
 
-
-TESTING
--------
-
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-``` 
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ``` 
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
+Penggunaan plugin css-compress
+==================
+Setiap kali update CSS, hapus semua file css di /public_html/assets/css-compress/
